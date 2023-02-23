@@ -882,7 +882,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &558691614
 GameObject:
@@ -1080,6 +1080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 664094655}
+  - component: {fileID: 664094656}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1094,15 +1095,39 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664094654}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 803117959}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664094656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664094654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3487e35f2558148a66e987d9bbf8dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _calculationData: {fileID: 11400000, guid: 140058fdc547676419b8a304b53723f9, type: 2}
+  _playerHealthText: {fileID: 326191108}
+  _playerMoneyText: {fileID: 888758955}
+  _playerPowerText: {fileID: 1405474332}
+  _enemyPowerText: {fileID: 1404524588}
+  _increaseHealthButton: {fileID: 608989698}
+  _decreaseHealthButton: {fileID: 1264877274}
+  _increaseMoneyButton: {fileID: 1200501526}
+  _decreaseMoneyButton: {fileID: 1589906163}
+  _increasePowerButton: {fileID: 437389585}
+  _decreasePowerButton: {fileID: 1493512440}
+  _fightButton: {fileID: 301219568}
 --- !u!1 &677995377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,7 +1847,7 @@ GameObject:
   - component: {fileID: 1264877275}
   - component: {fileID: 1264877274}
   m_Layer: 0
-  m_Name: DecreaseHealthButton (1)
+  m_Name: DecreaseHealthButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2182,7 +2207,7 @@ GameObject:
   - component: {fileID: 1404524589}
   - component: {fileID: 1404524588}
   m_Layer: 0
-  m_Name: EnemyHealthData
+  m_Name: EnemyPoweData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2228,7 +2253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enemy Health: 0'
+  m_text: 'Enemy Power: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2599,7 +2624,7 @@ GameObject:
   - component: {fileID: 1493512441}
   - component: {fileID: 1493512440}
   m_Layer: 0
-  m_Name: DecreasePowerButton (1)
+  m_Name: DecreasePowerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2805,7 +2830,7 @@ GameObject:
   - component: {fileID: 1589906164}
   - component: {fileID: 1589906163}
   m_Layer: 0
-  m_Name: DecreaseMoneyrButton (1)
+  m_Name: DecreaseMoneyrButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
