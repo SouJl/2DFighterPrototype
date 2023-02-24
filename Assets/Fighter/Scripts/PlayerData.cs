@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace FighterGame
 {
@@ -35,11 +36,9 @@ namespace FighterGame
 
         private void SetValue(int value)
         {
+            value = Mathf.Clamp(value, 0, int.MaxValue);
             if (_value == value)
                 return;
-            if (value < 0) 
-                return;
-            
             _value = value;
             Notify();
         }

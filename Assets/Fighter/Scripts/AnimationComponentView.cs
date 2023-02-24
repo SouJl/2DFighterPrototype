@@ -13,21 +13,20 @@ namespace FighterGame
         
         private int _currentPointIndex = 0;
 
-        private bool _isActive;
-
         private void Awake()
         {
-            _isActive = true;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             StartCoroutine(Animation());
         }
 
         IEnumerator Animation()
         {
-            while (_isActive)
+            var waitForSeconds = new WaitForSeconds(_anomationSpeed);
+            
+            while (true)
             {
                 _spriteRenderer.sprite = GetCurrentSprite();
-                yield return new WaitForSeconds(_anomationSpeed);
+                yield return waitForSeconds;
             }     
         }
 
@@ -40,7 +39,6 @@ namespace FighterGame
 
         private void OnDestroy()
         {
-            _isActive = false;
             StopCoroutine(Animation());
         }
     }

@@ -3704,7 +3704,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7877b0c7eeffc48a2a26340106e154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleSprites: []
+  _idleSprites:
+  - {fileID: 21300000, guid: d7bba34ab3d8d174891cd3663d0fccd2, type: 3}
+  - {fileID: 21300000, guid: b9fadaf8f0fd4a24eaf1feabcd0b4c7c, type: 3}
+  - {fileID: 21300000, guid: 25dafdadc51dc384c9b9aba27226bd27, type: 3}
+  - {fileID: 21300000, guid: 5903cd7287183d841b7512e49b615a3b, type: 3}
   _anomationSpeed: 0.15
 --- !u!1 &1589906161
 GameObject:

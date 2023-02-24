@@ -51,7 +51,7 @@ namespace FighterGame
 
         private void Start()
         {
-            _enemy = new EnemyModel("Enemy Punck", _calculationData);
+            _enemy = new EnemyModel("Enemy Punk", _calculationData);
 
             _money = CreatePlayerData(DataType.Money);
             _heath = CreatePlayerData(DataType.Health);
