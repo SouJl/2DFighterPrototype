@@ -13,6 +13,7 @@ namespace FighterGame
         [SerializeField] private TMP_Text _playerHealthText;
         [SerializeField] private TMP_Text _playerMoneyText;
         [SerializeField] private TMP_Text _playerPowerText;
+        [SerializeField] private TMP_Text _playerCrimeText;
 
         [Header("Enemy Stats")]
         [SerializeField] private TMP_Text _enemyPowerText;
@@ -33,12 +34,18 @@ namespace FighterGame
         [SerializeField] private Button _increasePowerButton;
         [SerializeField] private Button _decreasePowerButton;
 
+        [Header("Crime Buttons")]
+        [SerializeField] private Button _increaseCrimeButton;
+        [SerializeField] private Button _decreaseCrimeButton;
+
         [Header("Gameplay Buttons")]
         [SerializeField] private Button _fightButton;
+        [SerializeField] private Button _escapeButton;
 
         private PlayerData _money;
         private PlayerData _heath;
         private PlayerData _power;
+        private PlayerData _crime;
 
         private EnemyModel _enemy;
 
@@ -49,6 +56,7 @@ namespace FighterGame
             _money = CreatePlayerData(DataType.Money);
             _heath = CreatePlayerData(DataType.Health);
             _power = CreatePlayerData(DataType.Power);
+            _crime = CreatePlayerData(DataType.Crime);
 
             Subscribe();
         }
@@ -58,6 +66,7 @@ namespace FighterGame
             DisposePlayerData(ref _money);
             DisposePlayerData(ref _heath);
             DisposePlayerData(ref _power);
+            DisposePlayerData(ref _crime);
 
             Unsubscribe();
         }
@@ -88,7 +97,11 @@ namespace FighterGame
             _increasePowerButton.onClick.AddListener(IncreasePower);
             _decreasePowerButton.onClick.AddListener(DecreasePower);
 
+            _increaseCrimeButton.onClick.AddListener(IncreaseCrime);
+            _decreaseCrimeButton.onClick.AddListener(DecreaseCrime);
+
             _fightButton.onClick.AddListener(Fight);
+            _escapeButton.onClick.AddListener(Escape);
         }
 
         private void Unsubscribe()
@@ -102,7 +115,11 @@ namespace FighterGame
             _increasePowerButton.onClick.RemoveListener(IncreasePower);
             _decreasePowerButton.onClick.RemoveListener(DecreasePower);
 
-            _fightButton.onClick.RemoveAllListeners();
+            _increaseCrimeButton.onClick.RemoveListener(IncreaseCrime);
+            _decreaseCrimeButton.onClick.RemoveListener(DecreaseCrime);
+
+            _fightButton.onClick.RemoveListener(Fight);
+            _escapeButton.onClick.RemoveListener(Escape);
         }
 
         private void IncreaseMoney() => IncreaseValue(_money);
@@ -113,6 +130,9 @@ namespace FighterGame
 
         private void IncreasePower() => IncreaseValue(_power);
         private void DecreasePower() => DecreaseValue(_power);
+
+        private void IncreaseCrime() => IncreaseValue(_crime);
+        private void DecreaseCrime() => DecreaseValue(_crime);
 
         private void IncreaseValue(PlayerData playerData)
         {
@@ -128,12 +148,13 @@ namespace FighterGame
 
         private void AddToValue(int addition, PlayerData playerData)
         {
-            playerData.Value += addition;      
+            playerData.Value += addition;
         }
 
         private void UpdateUI(PlayerData playerData)
         {
             ChangeTextData(playerData);
+            UpdateEscapeButtonVisibility();
         }
 
         private void ChangeTextData(PlayerData playerData)
@@ -153,19 +174,51 @@ namespace FighterGame
                 DataType.Health => _playerHealthText,
                 DataType.Money => _playerMoneyText,
                 DataType.Power => _playerPowerText,
+                DataType.Crime => _playerCrimeText,
                 _ => throw new ArgumentException($"Wrong {nameof(DataType)}")
             };
+
+        private void UpdateEscapeButtonVisibility()
+        {
+            const int minEnableValue = 0;
+            const int maxEnableValue = 2;
+            const int minVisibleValue = 0;
+            const int maxVisibleValue = 5;
+
+            float crimeValue = _crime.Value;
+
+            bool isEnable = minEnableValue <= crimeValue && crimeValue <= maxEnableValue;
+            bool isVisible = minVisibleValue <= crimeValue && crimeValue <= maxVisibleValue;
+
+            _escapeButton.interactable = isEnable;
+            _escapeButton.gameObject.SetActive(isVisible);
+
+        }
+
 
         private void Fight()
         {
             int enemyPower = _enemy.CalcPower();
             bool isVictory = _power.Value >= enemyPower;
 
-            string color = isVictory ? "#07FF00" : "#FF0000";
             string message = isVictory ? "Win" : "Lose";
+            string color = isVictory ? "#07FF00" : "#FF0000";
 
-            Debug.Log($"<color={color}>{message}!!!</color>");
+            LogInConsoleWithColor(message, color);
+
         }
+
+        private void Escape()
+        {
+            string message = "Escaped";
+            string color = "#FFCF40";
+
+            LogInConsoleWithColor(message, color);
+
+        }
+
+        private void LogInConsoleWithColor(string logMessage, string logColor) =>
+            Debug.Log($"<color={logColor}>{logMessage}!!!</color>");
 
     }
 }

@@ -4,6 +4,7 @@
     {
         Health,
         Money,
-        Power
+        Power,
+        Crime,
     }
 }

@@ -16,6 +16,7 @@ namespace FighterGame
         private int _currentPlayerHealth;
         private int _currentPlayerMoney;
         private int _currentPlayerPower;
+        private int _currentPlayerCrime;
 
         public EnemyModel(string name, ICalucalationData calucalationData) 
         {
@@ -37,6 +38,9 @@ namespace FighterGame
                 case DataType.Power:
                     _currentPlayerPower = playerData.Value;
                     break;
+                case DataType.Crime:
+                    _currentPlayerCrime = playerData.Value;
+                    break;
             }
 
             Debug.Log($"Notified {_name} change to {playerData.DataType:F}");
@@ -44,14 +48,21 @@ namespace FighterGame
 
         public int CalcPower()
         {
-            int healthCoef = CalcKHealth();
-            float moneyRatio = _currentPlayerMoney / _calucalationData.MoneyCoef;
-            float powerRatio = _currentPlayerPower / _calucalationData.PowerCoef;
+            int healthCoef = GetHelthCoeficient();
 
-            return (int)(moneyRatio + healthCoef + powerRatio);
+            float moneyRatio = _currentPlayerMoney / _calucalationData.MoneyCoef;
+            
+            float powerRatio = _currentPlayerPower * _calucalationData.PowerCoef;
+
+            float crimeRatio = GetCrimeRatio();
+
+            return (int)(healthCoef + moneyRatio + powerRatio + crimeRatio);
         }
 
-        private int CalcKHealth() =>
-            _currentPlayerHealth > _calucalationData.MaxPlayerHealth ? 100 : 5;
+        private int GetHelthCoeficient() =>
+            _currentPlayerHealth > _calucalationData.MaxPlayerHealth ? (_currentPlayerHealth * 2) : 3;
+
+        private float GetCrimeRatio()
+            => Mathf.Clamp(Mathf.Log(_currentPlayerCrime, 2), 0, _calucalationData.CrimeCoef);
     }
 }

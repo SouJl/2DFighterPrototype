@@ -37,7 +37,9 @@ namespace FighterGame
         {
             if (_value == value)
                 return;
-
+            if (value < 0) 
+                return;
+            
             _value = value;
             Notify();
         }
